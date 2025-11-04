@@ -12,7 +12,10 @@ export const unstable_settings = {
 
 export default function ProtectedLayout() {
   const colorScheme = useColorScheme();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, isReady } = useAuth() || { isLoggedIn: false, isReady: false };
+
+
+  if(!isReady){return null;}
 
   if (!isLoggedIn) { return <Redirect href="/login" />; }
 
