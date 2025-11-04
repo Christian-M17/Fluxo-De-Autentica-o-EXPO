@@ -37,10 +37,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const logIn = () => {
         setIsLoggedIn(true);
+        storeAuthState({isLoggedIn: true});
         router.replace('/');
     };
     const logOut = () => {
         setIsLoggedIn(false);
+        storeAuthState({isLoggedIn: false});
         router.replace('/login');
     };
 
