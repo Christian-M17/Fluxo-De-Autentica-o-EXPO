@@ -1,11 +1,11 @@
 import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { useAuth } from '@/state/AuthContext';
 import { Image } from 'expo-image';
-import { Button, StyleSheet } from 'react-native';
+import { Button, StyleSheet, Text } from 'react-native';
 
 
 export default function HomeScreen() {
-  const { logOut } = useAuth();
+  const { user, logOut } = useAuth();
   
   return (
     <ParallaxScrollView
@@ -16,7 +16,9 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
       }>
+        <Text style={styles.texto}>Usuário: {user}</Text>
       <Button title="Sair" onPress={logOut} />
+      
     </ParallaxScrollView>
   );
 }
@@ -26,6 +28,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
+  },
+  texto:{
+    color: '#FFF',
+    fontSize: 16,
+    marginBottom: 16
   },
   stepContainer: {
     gap: 8,

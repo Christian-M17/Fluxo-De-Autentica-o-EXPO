@@ -5,7 +5,8 @@ import React, { createContext, useEffect } from "react";
 type AuthState = {
     isLoggedIn: boolean;
     isReady: boolean;
-    logIn: () => void;
+    user : string;  
+    logIn: (username:string) => void;
     logOut: () => void;
    
 }
@@ -13,6 +14,7 @@ type AuthState = {
 export const AuthContext = createContext<AuthState>({
     isLoggedIn: false,
     isReady: false,
+    user : '',
     logIn: () => {},
     logOut: () => {},
    
@@ -24,8 +26,9 @@ const authkey = 'authState';
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [isLoggedIn, setIsLoggedIn] = React.useState(false);
     const [isReady, setIsReady] = React.useState(false);
+    const [user, setUser] = React.useState('');
 
-    async function  storeAuthState(newState: {isLoggedIn: boolean}) {
+    async function  storeAuthState(newState: {isLoggedIn: boolean; user: string}) {
         try {
              await AsyncStorage.setItem(authkey, JSON.stringify(newState));
         } catch (error) {
@@ -35,14 +38,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const router = useRouter();
 
-    const logIn = () => {
+    const logIn = (username: string) => {
         setIsLoggedIn(true);
-        storeAuthState({isLoggedIn: true});
+        setUser(username);
+        storeAuthState({isLoggedIn: true, user: username});
         router.replace('/');
     };
     const logOut = () => {
         setIsLoggedIn(false);
-        storeAuthState({isLoggedIn: false});
+        storeAuthState({isLoggedIn: false, user : ''});
         router.replace('/login');
     };
 
@@ -51,7 +55,9 @@ useEffect(() => {
     try {
       const storedState = await AsyncStorage.getItem(authkey);
       if (storedState) {
-        setIsLoggedIn(JSON.parse(storedState).isLoggedIn);
+        const parsed = JSON.parse(storedState);
+        setIsLoggedIn(parsed.isLoggedIn);
+        setUser(parsed.user || '');
       }
     } catch (error) {
       console.error('Error fetching auth state:', error);
@@ -65,7 +71,7 @@ useEffect(() => {
 
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, isReady, logIn, logOut }}>
+        <AuthContext.Provider value={{ isLoggedIn, isReady, user, logIn, logOut }}>
             {children}
         </AuthContext.Provider>
     );
