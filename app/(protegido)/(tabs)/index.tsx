@@ -17,6 +17,9 @@ export default function HomeScreen() {
         />
       }>
         <Text style={styles.texto}>Usuário: {user}</Text>
+        {user === 'admin' && (
+          <Text style={styles.texto}>Você é um administrador.</Text>
+        )}
       <Button title="Sair" onPress={logOut} />
       
     </ParallaxScrollView>
