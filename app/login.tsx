@@ -14,14 +14,14 @@ const LoginScreen: React.FC = () => {
         if (isLoggedIn) {
             logIn(user);
         }
-        else{
+        else {
             alert('Credenciais inválidas');
         }
     };
 
     return (
         <View style={styles.container}>
-             <TextInput
+            <TextInput
                 style={styles.input}
                 placeholder="Username"
                 value={user}
@@ -29,7 +29,7 @@ const LoginScreen: React.FC = () => {
                 autoCapitalize="none"
                 keyboardType="default"
             />
-             <TextInput
+            <TextInput
                 style={styles.input}
                 placeholder="Password"
                 value={password}

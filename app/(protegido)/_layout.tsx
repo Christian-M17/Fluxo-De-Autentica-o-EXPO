@@ -15,14 +15,14 @@ export default function ProtectedLayout() {
   const { isLoggedIn, isReady } = useAuth() || { isLoggedIn: false, isReady: false };
 
 
-  if(!isReady){return null;}
+  if (!isReady) { return null; }
 
   if (!isLoggedIn) { return <Redirect href="/login" />; }
 
   return (
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+    </Stack>
   );
 }

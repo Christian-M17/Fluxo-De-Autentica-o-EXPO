@@ -21,35 +21,35 @@ export default function HomeScreen() {
 
   return (
     <View>
-      
-        <Text style={styles.texto}>Usuário: {user}</Text>
 
-        {user === 'admin' && (
-          <Text style={styles.texto}>Você é um administrador.</Text>
-        )}
+      <Text style={styles.texto}>Usuário: {user}</Text>
+
+      {user === 'admin' && (
+        <Text style={styles.texto}>Você é um administrador.</Text>
+      )}
       <Button title="Sair" onPress={logOut} />
-      
+
       {torneios.length > 0 ? (
-  torneios.map((torneio, index) => (
-    <View key={index} style={styles.card}>
-      <Text style={styles.titulo}>{torneio.nome}</Text>
-      <Text style={styles.data}>
-        Iniciado em: {new Date(torneio.criadoEm).toLocaleString("pt-BR")}
-      </Text>
+        torneios.map((torneio, index) => (
+          <View key={index} style={styles.card}>
+            <Text style={styles.titulo}>{torneio.nome}</Text>
+            <Text style={styles.data}>
+              Iniciado em: {new Date(torneio.criadoEm).toLocaleString("pt-BR")}
+            </Text>
+          </View>
+        ))
+      ) : (
+        <Text>Nenhum torneio encontrado.</Text>
+      )}
+
+
+
     </View>
-  ))
-) : (
-  <Text>Nenhum torneio encontrado.</Text>
-)}
-
-
-
-   </View>
   );
 }
 
 const styles = StyleSheet.create({
-  card : {
+  card: {
     backgroundColor: '#ff7300ff',
     padding: 16,
     borderRadius: 8,
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 8,
   },
-  texto:{
+  texto: {
     color: '#FFF',
     fontSize: 16,
     marginBottom: 16
