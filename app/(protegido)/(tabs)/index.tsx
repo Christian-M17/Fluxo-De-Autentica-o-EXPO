@@ -1,32 +1,69 @@
-import ParallaxScrollView from '@/components/parallax-scroll-view';
+import { listarTorneios } from '@/service/challonge';
 import { useAuth } from '@/state/AuthContext';
-import { Image } from 'expo-image';
-import { Button, StyleSheet, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
+
+
 
 
 export default function HomeScreen() {
   const { user, logOut } = useAuth();
-  
+  const [torneios, setTorneios] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function carregarTorneios() {
+      const dados = await listarTorneios();
+      setTorneios(dados);
+    }
+    carregarTorneios();
+  }, []);
+
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
+    <View>
+      
         <Text style={styles.texto}>Usuário: {user}</Text>
+
         {user === 'admin' && (
           <Text style={styles.texto}>Você é um administrador.</Text>
         )}
       <Button title="Sair" onPress={logOut} />
       
-    </ParallaxScrollView>
+      {torneios.length > 0 ? (
+  torneios.map((torneio, index) => (
+    <View key={index} style={styles.card}>
+      <Text style={styles.titulo}>{torneio.nome}</Text>
+      <Text style={styles.data}>
+        Iniciado em: {new Date(torneio.criadoEm).toLocaleString("pt-BR")}
+      </Text>
+    </View>
+  ))
+) : (
+  <Text>Nenhum torneio encontrado.</Text>
+)}
+
+
+
+   </View>
   );
 }
 
 const styles = StyleSheet.create({
+  card : {
+    backgroundColor: '#ff7300ff',
+    padding: 16,
+    borderRadius: 8,
+    marginBottom: 16,
+  },
+  titulo: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#2c2c2cff',
+    marginBottom: 8,
+  },
+  data: {
+    color: '#ffffffff',
+  },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
