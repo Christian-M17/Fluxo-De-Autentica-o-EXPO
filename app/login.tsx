@@ -38,7 +38,7 @@ const LoginScreen: React.FC = () => {
                 keyboardType="default"
                 secureTextEntry
             />
-            <Button title="login" onPress={handleLogin} />
+            <Button color='#ffa51eff' title="login" onPress={handleLogin} />
         </View>
     );
 };
@@ -46,6 +46,7 @@ const LoginScreen: React.FC = () => {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
+ 
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -56,8 +57,8 @@ const styles = StyleSheet.create({
         width: '90%',
         height: 48,
         borderWidth: 1,
-        color: '#FFF',
-        borderColor: '#ccc',
+        color: '#ffa51eff',
+        borderColor: '#ffa51eff',
         borderRadius: 8,
         marginBottom: 12,
         paddingHorizontal: 10,

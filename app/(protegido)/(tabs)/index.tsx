@@ -27,7 +27,7 @@ export default function HomeScreen() {
       {user === 'admin' && (
         <Text style={styles.texto}>Você é um administrador.</Text>
       )}
-      <Button title="Sair" onPress={logOut} />
+      <Button title="Sair" color='#ffa51eff' onPress={logOut} />
 
       {torneios.length > 0 ? (
         torneios.map((torneio, index) => (
@@ -50,10 +50,13 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#ff7300ff',
+    backgroundColor: '#ffa51eff',
+    marginTop: 8,
     padding: 16,
+    width: '90%',
+    alignSelf: 'center',
     borderRadius: 8,
-    marginBottom: 16,
+    marginBottom: 8,
   },
   titulo: {
     fontSize: 18,
@@ -70,6 +73,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   texto: {
+    textAlign: 'center',
     color: '#FFF',
     fontSize: 16,
     marginBottom: 16

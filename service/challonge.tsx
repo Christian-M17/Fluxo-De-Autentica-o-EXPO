@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const challongeAPI = "https://api.challonge.com/v1";
-const apiKey = "Insira a chave aqui";
+const apiKey = "Insira a chave da API aqui";
 
 const api = axios.create({
     baseURL: challongeAPI,
